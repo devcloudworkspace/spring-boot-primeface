@@ -1,0 +1,25 @@
+#name of the workflow
+name: CI
+
+#triggers
+on:
+  push:
+    branches: [master]
+  pull:
+    branches: [master]
+  workflow_dispatch:
+
+#jobs
+jobs:
+  #job id
+  build:
+    #runner
+    runs-on: ubuntu-latest
+    #steps for job
+    steps:
+      # checkout action to download code into runner
+      - uses: actions/checkout@v2
+      - name: create and push image
+        run: |
+          chmod +x ./build.sh
+          sudo ./build.sh "1.0.$GITHUB_RUN_NUMBER" ${{ secrets.REGISTRY_USERNAME }} ${{ secrets.REGISTRY_TOKEN }}
