@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<f:view>
+	<h:head>
+		<title>Welcome List</title>
+		<h:outputStylesheet library="css" name="styles.css" />
+	</h:head>
+	<h:body>
+		<h1><p:outputLabel value="Welcome List"/></h1>
+		<h:form>
+			<h:panelGroup layout="block" style="none">
+				<h:commandButton value="Add Member" action="#{helloController.index}"/>
+			</h:panelGroup>
+			<p:dataList value="#{memberViewController.memberListBean.members}" var="member" type="ordered">
+				<p:outputLabel value="#{member.name}"/>
+			</p:dataList>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

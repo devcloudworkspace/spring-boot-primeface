@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:view>
+    <h:head>
+        <title>Welcome</title>
+        <h:outputStylesheet library="css" name="styles.css" />
+    </h:head>
+    <h:body>
+        <h1><p:outputLabel value="Welcome Members"/></h1>
+        <h:form>
+            <h:panelGroup layout="block" style="none">
+                <h:commandButton value="View Members" action="#{memberViewController.showMembers}"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" style="none" id="panel-add">
+                <h:outputLabel value="Name "/>
+                <h:inputText value="#{helloController.memberBean.name}"/>
+                <h:commandButton value="Add Member" actionListener="#{helloController.addMember}" render="status-message panel-add"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" style="inline" id="status-message">
+                <h:outputText value="#{helloController.message}"/>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
