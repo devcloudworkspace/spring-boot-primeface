@@ -3,6 +3,9 @@ version=$1
 REGISTRY_USERNAME=$2
 REGISTRY_TOKEN=$3
 
+echo "login to quay.io"
+buildah login -u $REGISTRY_USERNAME --password $REGISTRY_TOKEN quay.io
+
 echo "create a build container"
 buildcon=$(buildah from eclipse-temurin:21-jre)
 buildah config --workingdir /src $buildcon
@@ -16,8 +19,7 @@ echo "commit an image"
 buildah commit $buildcon spring-boot-primeface$version
 
 echo "push to quay.io"
-buildah login -u $REGISTRY_USERNAME --password $REGISTRY_TOKEN quay.io
-buildah build -t quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
+#buildah build -t quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
 buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
 buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:latest
 
