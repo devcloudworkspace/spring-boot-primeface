@@ -6,22 +6,21 @@ REGISTRY_TOKEN=$3
 echo "create a build container"
 buildcon=$(buildah from eclipse-temurin:21-jre)
 buildah config --workingdir /src $buildcon
-buildah copy $buildcon target/*.jar app.jar
+buildah copy $buildcon target/*.war app.war
 buildah config --port 80 $buildcon
 buildah config --port 443 $buildcon
 
-buildah config --entrypoint 'java -jar app.jar' $buildcon
+buildah config --entrypoint 'java -jar app.war' $buildcon
 
 echo "commit an image"
 buildah commit $buildcon spring-boot-primeface$version
-
-echo "cleanup"
-#buildah umount --all
-#buildah rm --all
 
 echo "push to quay.io"
 buildah login -u $REGISTRY_USERNAME --password $REGISTRY_TOKEN quay.io
 buildah build -t quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
 buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
-#buildah push quay.io/devcloud1user4/myrepo/spring-boot-primeface:latest
-#buildah push --creds $REGISTRY_USERNAME:$REGISTRY_TOKEN quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version quay.io/devcloud1user4/myrepo/spring-boot-primeface:latest
+buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:latest
+
+echo "cleanup"
+buildah umount --all
+buildah rm --all
