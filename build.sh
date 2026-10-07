@@ -21,6 +21,6 @@ buildah build -t quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$versio
 buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
 buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:latest
 
-echo "cleanup"
-buildah umount --all
-buildah rm --all
+#echo "cleanup"
+#buildah umount --all
+#buildah rm --all
