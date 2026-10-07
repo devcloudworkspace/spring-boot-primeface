@@ -68,6 +68,8 @@ jobs:
       - name: Get POD
         run: |
           oc get all
+          oc apply -f deployment/deployment.yml
+        continue-on-error: true
 #          oc get po -A | grep springboot-primeface | grep Running
 #          oc rollout latest springboot-primeface  -n devcloud1user4-dev
 #          sleep 10
