@@ -50,7 +50,60 @@ jobs:
           chmod +x ./build.sh
           sudo ./build.sh "1.0.$GITHUB_RUN_NUMBER" ${{ secrets.REGISTRY_USERNAME }} ${{ secrets.REGISTRY_TOKEN }}
 
-      - name: deploy image in openshift
-        run: |
-          chmod +x ./deploy.sh
-          sudo ./deploy.sh
+      - name: Authenticate and set context
+        uses: redhat-actions/oc-login@v2
+        env:
+          # These can be stored in secrets, if desired.
+          OPENSHIFT_USER: devcloud1user4@atomicmail.io
+          OPENSHIFT_NAMESPACE: devcloud1user4-dev
+
+        with:
+          # URL to your OpenShift cluster.
+          # Refer to Step 2.
+          openshift_server_url: https://api.rm2.thpm.p1.openshiftapps.com:6443
+
+          # Authentication Token. Can use username and password instead.
+          # Refer to Step 3.
+          openshift_token: sha256~WLHeSCAa4sZ1UDp-tbnoaDAojuQMpGSWHblH8S0dwgc
+
+          # Credentials, if desired instead of token.
+          # Username and password override token if they are set.
+#          openshift_username: ${{ env.OPENSHIFT_USER }}
+#          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
+
+          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
+          insecure_skip_tls_verify: true
+          # This method is more secure, if the certificate from Step 4 is available.
+#          certificate_authority_data: ${{ secrets.CA_DATA }}
+
+          # Optional - this sets your Kubernetes context's current namespace after logging in.
+          namespace: devcloud1user4-dev
+
+#      - name: Authenticate and set context
+#        uses: redhat-actions/oc-login@v2
+#        env:
+#          # These can be stored in secrets, if desired.
+#          OPENSHIFT_USER: my-username
+#          OPENSHIFT_NAMESPACE: my-namespace
+#
+#        with:
+#          # URL to your OpenShift cluster.
+#          # Refer to Step 2.
+#          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
+#
+#          # Authentication Token. Can use username and password instead.
+#          # Refer to Step 3.
+#          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+#
+#          # Credentials, if desired instead of token.
+#          # Username and password override token if they are set.
+#          openshift_username: ${{ env.OPENSHIFT_USER }}
+#          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
+#
+#          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
+#          insecure_skip_tls_verify: true
+#          # This method is more secure, if the certificate from Step 4 is available.
+#          certificate_authority_data: ${{ secrets.CA_DATA }}
+#
+#          # Optional - this sets your Kubernetes context's current namespace after logging in.
+#          namespace: ${{ env.OPENSHIFT_NAMESPACE }}
