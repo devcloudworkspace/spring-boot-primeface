@@ -16,12 +16,12 @@ buildah config --port 443 $buildcon
 buildah config --entrypoint 'java -jar app.war' $buildcon
 
 echo "commit an image"
-buildah commit $buildcon spring-boot-primeface$version
+buildah commit $buildcon spring-boot-primeface:$version
 
 echo "push to quay.io"
 #buildah build -t quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
-buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
-buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:latest
+buildah push spring-boot-primeface:$version quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
+#buildah push spring-boot-primeface:$version quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:latest
 
 #echo "cleanup"
 #buildah umount --all
