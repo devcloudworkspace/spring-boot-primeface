@@ -20,8 +20,8 @@ echo "cleanup"
 #buildah rm --all
 
 echo "push to quay.io"
-buildah login -u devcloud1user4 --password $REGISTRY_TOKEN $REGISTRY_USERNAME
-buildah build -t quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version
-buildah push quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version
+buildah login -u $REGISTRY_USERNAME --password $REGISTRY_TOKEN quay.io
+buildah build -t quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
+buildah push quay.io/$REGISTRY_USERNAME/myrepo/spring-boot-primeface:$version
 #buildah push quay.io/devcloud1user4/myrepo/spring-boot-primeface:latest
 #buildah push --creds $REGISTRY_USERNAME:$REGISTRY_TOKEN quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version quay.io/devcloud1user4/myrepo/spring-boot-primeface:latest
