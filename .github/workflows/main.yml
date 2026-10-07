@@ -49,3 +49,8 @@ jobs:
         run: |
           chmod +x ./build.sh
           sudo ./build.sh "1.0.$GITHUB_RUN_NUMBER" ${{ secrets.REGISTRY_USERNAME }} ${{ secrets.REGISTRY_TOKEN }}
+
+      - name: deploy image in openshift
+        run: |
+          chmod +x ./deploy.sh
+          sudo ./deploy.sh

@@ -1,0 +1,69 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: example
+  namespace: devcloud1user4-dev
+  uid: b8e6d11d-9bab-435e-9f4a-bde612168574
+  resourceVersion: '6207410021'
+  generation: 2
+  creationTimestamp: '2026-10-07T10:19:03Z'
+  annotations:
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: oc.exe
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-10-07T10:19:03Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-10-07T10:19:03Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-10-07T10:25:43Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+spec:
+  host: example-devcloud1user4-dev.apps.rm2.thpm.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: example
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: example-devcloud1user4-dev.apps.rm2.thpm.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2026-10-07T10:19:03Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.rm2.thpm.p1.openshiftapps.com
