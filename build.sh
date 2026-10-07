@@ -20,5 +20,5 @@ echo "cleanup"
 #buildah rm --all
 
 echo "push to github"
-buildah push --creds $REGISTRY_USERNAME:$REGISTRY_TOKEN localhost/spring-boot-primeface:$version quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version
-buildah push --creds $REGISTRY_USERNAME:$REGISTRY_TOKEN localhost/spring-boot-primeface:$version quay.io/devcloud1user4/myrepo/spring-boot-primeface:latest
+buildah push --creds $REGISTRY_USERNAME:$REGISTRY_TOKEN quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version
+buildah push --creds $REGISTRY_USERNAME:$REGISTRY_TOKEN quay.io/devcloud1user4/myrepo/spring-boot-primeface:$version quay.io/devcloud1user4/myrepo/spring-boot-primeface:latest
