@@ -67,8 +67,8 @@ jobs:
           namespace: devcloud1user4-dev
       - name: Get POD
         run: |
-          oc get all
           oc apply -f deployment/deployment.yml
+          oc get all
         continue-on-error: true
 #          oc get po -A | grep springboot-primeface | grep Running
 #          oc rollout latest springboot-primeface  -n devcloud1user4-dev
